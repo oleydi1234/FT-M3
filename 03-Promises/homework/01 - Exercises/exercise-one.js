@@ -28,7 +28,16 @@ function problemA() {
   });
 
   // promise version
-  // Tu código acá:
+// Tu código acá:
+exerciseUtils.promisifiedReadFile("poem-one/stanza-02.txt")
+.then((value1)=>{
+  exerciseUtils.blue(value1)
+  return exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt")
+}).then((value2)=>{
+  exerciseUtils.blue(value2)
+  console.log('done')
+})
+// {<pending>}
 }
 
 function problemB() {
@@ -43,6 +52,8 @@ function problemB() {
 
   // promise version
   // Tu código acá:
+  exerciseUtils.promisifiedReadFile("poem-one/wrong-file-name.txt")
+  .then((v)=>exerciseUtils.blue(v),(e)=>exerciseUtils.magenta(new Error(e)))
 }
 
 function problemC() {
@@ -61,4 +72,14 @@ function problemC() {
 
   // promise version
   // Tu código acá:
+  exerciseUtils.promisifiedReadFile("poem-one/stanza-03.txt")
+  .then((value1)=>{
+    exerciseUtils.blue(value1)
+    return exerciseUtils.promisifiedReadFile("poem-one/stanza-04.txt")
+  }).then((value2)=>{
+    exerciseUtils.blue(value2)
+  }).catch((err)=>{
+    exerciseUtils.magenta(new Error(err))
+  })
+  .then(null,(e)=>{e})
 }

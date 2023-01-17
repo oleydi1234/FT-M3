@@ -28,7 +28,23 @@ function problemA() {
   });
 
   // promise version
-  // Tu código acá:
+ // Tu código acá:
+ exerciseUtils.promisifiedReadFile("poem-two/stanza-01.txt").then((v1) => {
+  exerciseUtils.blue(v1);
+});
+exerciseUtils.promisifiedReadFile("poem-two/stanza-02.txt").then((v2) => {
+  exerciseUtils.blue(v2);
+});
+ // Versión OK del README
+  // let p1 = exerciseUtils.promisifiedReadFile("poem-two/stanza-01.txt");
+  // let p2 = exerciseUtils.promisifiedReadFile("poem-two/stanza-02.txt");
+
+  // Promise.all([p1, p2]).then((result) => {
+  //   // result -> ["blanafds sfs", "djsgdsfg.."]
+  //   exerciseUtils.blue(result[0]);
+  //   exerciseUtils.blue(result[1]);
+  //   console.log("done");
+  // });
 }
 
 function problemB() {
@@ -45,6 +61,16 @@ function problemB() {
 
   // promise version
   // Tu código acá:
+  var p1 = exerciseUtils.promisifiedReadFile(filenames[0]);
+  for (let i = 1; i <= filenames.length; i++) {
+    p1 = p1.then((v) => {
+      exerciseUtils.blue(v);
+      if (i === filenames.length) {
+        console.log("done");
+      }
+      return exerciseUtils.promisifiedReadFile(filenames[i]);
+    });
+  }
 }
 
 function problemC() {
@@ -64,6 +90,22 @@ function problemC() {
 
   // promise version
   // Tu código acá:
+  var p1 = exerciseUtils.promisifiedReadFile(filenames[0]);
+  for (let i = 1; i <= filenames.length; i++) {
+    p1 = p1.then((v) => {
+      exerciseUtils.blue(v);
+      if (i === filenames.length) {
+        console.log("done");
+      }
+      return exerciseUtils.promisifiedReadFile(filenames[i]);
+    });
+    if(i === filenames.length){
+      p1.catch((err)=>{
+        exerciseUtils.magenta(new Error(err))
+        console.log("done");
+      })
+    }
+  }
 }
 
 function problemD() {
@@ -72,3 +114,31 @@ function problemD() {
     // tu código acá:
   }
 }
+
+// exerciseUtils.promisifiedReadFile("poem-two/stanza-01.txt")
+// .then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-02.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-03.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-04.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-05.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-06.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-07.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   return exerciseUtils.promisifiedReadFile("poem-two/stanza-08.txt")
+// }).then((v)=>{
+//   exerciseUtils.blue(v)
+//   console.log("done")
+// })
+
