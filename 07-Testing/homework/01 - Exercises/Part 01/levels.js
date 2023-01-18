@@ -23,7 +23,8 @@ const levelFour = (num) => {
          tot += Number(n);
       });
    let rev = Number(tot.toString().split('').reverse().join(''));
-   return rev * tot === num;
+   let result = rev * tot === num
+   return result;
 };
 
 module.exports = { levelOne, levelTwo, levelThree, levelFour };
